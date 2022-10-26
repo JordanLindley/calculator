@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Calculator</title>
+</head>
+<body>
+  <!-- Header: something minimal and centered -->
+  <div class="header">
+    <h1 class="title">Calculator</h1>
+  </div>
+  <!-- Container holding the calculator as a whole -->
+  <div class="container">
+    <div class="calculator-body">
+    <!-- Container within calculator for the screen -->
+    <div class="display">
+      <div class="history"></div>
+      <div class="current"></div>
+    </div>
+    <!-- Container within calculator for numbers and buttons-->
+    <div class="numpad">
+      
+      <div class="erasers">
+        <button class="op all-clear">AC</button>
+        <button class="op clear">C</button>
+        <button class="op backspace">&#9003;</button>
+      </div>
+
+      <div class="numbers">
+        <button class="numkey number">7</button>
+        <button class="numkey number">8</button>
+        <button class="numkey number">9</button>
+        <button class="numkey number">4</button>
+        <button class="numkey number">5</button>
+        <button class="numkey number">6</button>
+        <button class="numkey number">1</button>
+        <button class="numkey number">2</button>
+        <button class="numkey number">3</button>
+        <button class="numkey negative">+/-</button>
+        <button class="numkey number">0</button>
+        <button class="numkey decimal">.</button>
+      </div>
+
+      <div class="operations">
+        <button class="op math divide">&#247;</button>
+        <button class="op math multiply">&#215;</button>
+        <button class="op math subtract">&#8722;</button>
+        <button class="op math add">&#43;</button>
+        <button class="op math equals">&#61;</button>
+      </div>
+    </div>
+    
+  </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
