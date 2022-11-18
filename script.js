@@ -17,7 +17,14 @@ const equals = document.querySelector('.equals');
 // add event listeners for each button and assign to variables
   // numbers (listen for click or keydown to corresponding textcontent and use the text content of the element)
 numbers.forEach(number => {
-  number.addEventListener('click', typeNumber);
+  number.addEventListener('click', () => {
+    if (currentDisplay.textContent == '') {
+    currentDisplay.textContent = number.textContent;
+    }
+    else {
+      
+    }
+  });
 })
 
 window.addEventListener('keypress', e => {
@@ -29,8 +36,9 @@ window.addEventListener('keypress', e => {
   // a part of each event listener should be to append the text content of the button to the display div
 
 // add typed or clicked number to display div
-function typeNumber(key) {
-  currentDisplay.innerText = key.innerText;
+function typeNumber(key) { 
+  let liveDisplay;
+  // currentDisplay.innerText = `${key.innerText}`;
 }
 
 // Addition function
