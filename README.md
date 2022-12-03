@@ -1,1 +1,3 @@
-A calculator made only with HTML, CSS, and Javascript!
+## Why do math in your head when a calculator can do the trick?
+
+Built as part of _The Odin Project_. 
