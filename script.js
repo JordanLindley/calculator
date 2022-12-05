@@ -24,12 +24,7 @@ const equals = document.querySelector('.equals');
   // numbers (listen for click or keydown to corresponding textcontent and use the text content of the element)
 numbers.forEach(number => {
   number.addEventListener('click', () => {
-    if (currentDisplay.textContent == ``) {
-    currentDisplay.innterText = `${number.innerText}`;
-    }
-    else {
-      
-    }
+    currentDisplay.innerHTML = `${number.innerText}`;
   });
 })
 
@@ -41,7 +36,7 @@ equals.addEventListener('keypress', e => {
 })
 
 window.addEventListener('keydown', e => {
-  let keycode = e.which || e.keyCode;
+  let keycode = e.keyCode;
   let valueEntered = String.fromCharCode(keycode);
   console.log(valueEntered);
 });
@@ -67,7 +62,9 @@ const multiply = (a, b) => {
 
 // Divide function
 const divide = (a, b) => {
-  return a / b;
+  if (b === 0) {
+    return null;
+  } else return a / b;
 }
 
 // Subtract funtion
@@ -75,9 +72,29 @@ const subtract = (a, b) => {
   return a - b;
 }
 
+// keyboard handler
+function convertOperator(keyboardOperator) {
+  if (keyboardOperator === '/') return '÷'
+  if (keyboardOperator === '*') return '×'
+  if (keyboardOperator === '-') return '−'
+  if (keyboardOperator === '+') return '+'
+}
+
 // operate function, run all operators
-function operate(math, number1, number2) {
-  
+function operate(operator, num1, num2) {
+  num1 = Number(num1);
+  num2 = Number(num2);
+  if (operator == '+') {
+    add(num1, num2);
+  } else if (operator == '−') {
+    subtract(num1, num2);
+  } else if (operator == '×') {
+    multiply(num1, num2);
+  } else if (operator == '÷') {
+    divide(num1, num2);
+  } else {
+    return null;
+  }
 }
 // Display logic
   // print last-pressed button as history (need new div?)
