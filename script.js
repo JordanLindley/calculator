@@ -1,6 +1,6 @@
 // assign operators to variables to capture text in DOM through functions
 let firstOperand = '';
-let secondOperan = '';
+let secondOperand = '';
 let currentOperand = null;
 let shouldResetDisply = false;
 
@@ -24,7 +24,7 @@ const equals = document.querySelector('.equals');
   // numbers (listen for click or keydown to corresponding textcontent and use the text content of the element)
 numbers.forEach(number => {
   number.addEventListener('click', () => {
-    currentDisplay.innerHTML = `${number.innerText}`;
+    typeNumber(number);
   });
 })
 
@@ -36,17 +36,29 @@ equals.addEventListener('keypress', e => {
 })
 
 window.addEventListener('keydown', e => {
-  let keycode = e.keyCode;
-  let valueEntered = String.fromCharCode(keycode);
-  console.log(valueEntered);
+  let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  let valueEntered = e.key;
+
+  let match = numbers.find(number => {
+    if (Number(valueEntered) === number) {
+      return true;
+    }
+  })
+
+  if (match != null) {
+    typeNumber(match);
+  }
 });
   // operators (listen for click or keydown for specific operator on keypad, different variables for each operator)
   // a part of each event listener should be to append the text content of the button to the display div
 
 // // add typed or clicked number to display div
-function typeNumber(key) { 
-
-  // currentDisplay.innerText = `${key.innerText}`;
+function typeNumber(number) { 
+  if (currentDisplay.innerHTML == '') { 
+    currentDisplay.innerHTML = `${Number(number)}`;
+  } else {
+    currentDisplay.innerHTML = `${(Number(currentDisplay.innerText) * 10) + Number(number)}`;
+  }
 }
 
 // Addition function
@@ -96,5 +108,6 @@ function operate(operator, num1, num2) {
     return null;
   }
 }
+
 // Display logic
   // print last-pressed button as history (need new div?)
