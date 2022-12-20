@@ -1,8 +1,8 @@
 // assign operators to variables to capture text in DOM through functions
-let firstOperand = '';
-let secondOperand = '';
+let number1;
+let number2;
+let lastOperand = '';
 let currentOperand = null;
-let shouldResetDisply = false;
 
 // pull elements from the DOM, store them in variables
 const numbers = document.querySelectorAll('.number');
@@ -24,15 +24,45 @@ const equals = document.querySelector('.equals');
   // numbers (listen for click or keydown to corresponding textcontent and use the text content of the element)
 numbers.forEach(number => {
   number.addEventListener('click', () => {
-    typeNumber(number);
+    typeNumber(number.innerText);
   });
 })
 
-equals.addEventListener('click', operate);
+clear.addEventListener('click', clearCurrent);
+clear.addEventListener('keypress', e => {
+  if (e.key === 'Backspace') {
+    clearCurrent();
+  }
+})
+
+allClear.addEventListener('click', clearAll);
+allClear.addEventListener('keypress', e => {
+  if (e.key === 'Escape') {
+    clearAll();
+  }
+})
+
+  // equals sign or "Enter" key
+equals.addEventListener('click', operate(number1, number2));
 equals.addEventListener('keypress', e => {
   if (e.key === 'Enter') {
-    operate;
+    operate(number1, number2);
   }
+})
+
+  // operators
+addition.addEventListener('click', e => {
+  number1 = Number(`${currentDisplay.innerHTML}`);
+  historyDisplay.innerHTML = `${currentDisplay.innerHTML}`;
+  clearCurrent();
+  currentOperand = '+';
+})
+
+subtraction.addEventListener('click', e => {
+  number1 = Number(`${currentDisplay.innerHTML}`);
+  historyDisplay.innerHTML = `${currentDisplay.innerHTML}`;
+  clearCurrent();
+  currentOperand = '−'
 })
 
 window.addEventListener('keydown', e => {
@@ -59,6 +89,15 @@ function typeNumber(number) {
   } else {
     currentDisplay.innerHTML = `${(Number(currentDisplay.innerText) * 10) + Number(number)}`;
   }
+}
+
+function clearCurrent() {
+  currentDisplay.innerHTML = '';
+}
+
+function clearAll() {
+  currentDisplay.innerHTML = '';
+  historyDisplay.innerHTML - '';
 }
 
 // Addition function
@@ -97,13 +136,19 @@ function operate(operator, num1, num2) {
   num1 = Number(num1);
   num2 = Number(num2);
   if (operator == '+') {
-    add(num1, num2);
+    clearCurrent()
+    let sum = add(num1, num2);
+    currentDisplay.innerHTML = `${sum}`;
+    console.log(sum);
   } else if (operator == '−') {
-    subtract(num1, num2);
+    clearCurrent()
+    currentDisplay.innerHTML = `${subtract(num1, num2)}`;;
   } else if (operator == '×') {
-    multiply(num1, num2);
+    clearCurrent()
+    currentDisplay.innerHTML = `${multiply(num1, num2)}`;
   } else if (operator == '÷') {
-    divide(num1, num2);
+    clearCurrent()
+    currentDisplay.innerHTML = `${divide(num1, num2)}`;
   } else {
     return null;
   }
