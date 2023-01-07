@@ -43,10 +43,15 @@ allClear.addEventListener('keypress', e => {
 })
 
   // equals sign or "Enter" key
-equals.addEventListener('click', operate(number1, number2));
+equals.addEventListener('click', () => {
+  number2 = Number(`${currentDisplay.innerHTML}`)
+  operate(currentOperand, number1, number2)}
+  );
+
 equals.addEventListener('keypress', e => {
   if (e.key === 'Enter') {
-    operate(number1, number2);
+    number2 = Number(`${currentDisplay.innerHTML}`)
+    operate(currentOperand, number1, number2);
   }
 })
 
@@ -65,6 +70,8 @@ subtraction.addEventListener('click', e => {
   currentOperand = '−'
 })
 
+
+
 window.addEventListener('keydown', e => {
   let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   let valueEntered = e.key;
@@ -82,7 +89,7 @@ window.addEventListener('keydown', e => {
   // operators (listen for click or keydown for specific operator on keypad, different variables for each operator)
   // a part of each event listener should be to append the text content of the button to the display div
 
-// // add typed or clicked number to display div
+// add typed or clicked number to display div
 function typeNumber(number) { 
   if (currentDisplay.innerHTML == '') { 
     currentDisplay.innerHTML = `${Number(number)}`;
@@ -114,7 +121,7 @@ const multiply = (a, b) => {
 // Divide function
 const divide = (a, b) => {
   if (b === 0) {
-    return null;
+    return Infinity;
   } else return a / b;
 }
 
@@ -135,6 +142,7 @@ function convertOperator(keyboardOperator) {
 function operate(operator, num1, num2) {
   num1 = Number(num1);
   num2 = Number(num2);
+  console.log(num1, num2);
   if (operator == '+') {
     clearCurrent()
     let sum = add(num1, num2);
@@ -156,3 +164,4 @@ function operate(operator, num1, num2) {
 
 // Display logic
   // print last-pressed button as history (need new div?)
+
