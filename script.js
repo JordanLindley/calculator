@@ -28,15 +28,24 @@ numbers.forEach(number => {
   });
 })
 
+decimal.addEventListener('click', () => {
+  currentDisplay.innerHTML += '.';
+})
+window.addEventListener('keydown', e => {
+  if (e.key === '.') {
+    currentDisplay.innerHTML += '.';
+  }
+})
+
 clear.addEventListener('click', clearCurrent);
-clear.addEventListener('keypress', e => {
-  if (e.key === 'Backspace') {
-    clearCurrent();
+window.addEventListener('keypress', e => {
+  if (e.key === 'Backspace' || e.key === 'Delete') {
+    clearCurrent()
   }
 })
 
 allClear.addEventListener('click', clearAll);
-allClear.addEventListener('keypress', e => {
+window.addEventListener('keypress', e => {
   if (e.key === 'Escape') {
     clearAll();
   }
@@ -48,7 +57,7 @@ equals.addEventListener('click', () => {
   operate(currentOperand, number1, number2)}
   );
 
-equals.addEventListener('keypress', e => {
+window.addEventListener('keypress', e => {
   if (e.key === 'Enter') {
     number2 = Number(`${currentDisplay.innerHTML}`)
     operate(currentOperand, number1, number2);
@@ -62,6 +71,14 @@ addition.addEventListener('click', e => {
   clearCurrent();
   currentOperand = '+';
 })
+window.addEventListener('keydown', e => {
+  if (e.key === '+') {
+    number1 = Number(`${currentDisplay.innerHTML}`);
+    historyDisplay.innerHTML = `${currentDisplay.innerHTML}`;
+    clearCurrent();
+    currentOperand = '+';
+  }
+})
 
 subtraction.addEventListener('click', e => {
   number1 = Number(`${currentDisplay.innerHTML}`);
@@ -69,8 +86,28 @@ subtraction.addEventListener('click', e => {
   clearCurrent();
   currentOperand = '−'
 })
+window.addEventListener('keydown', e => {
+  if (e.key === '-') {
+    number1 = Number(`${currentDisplay.innerHTML}`);
+    historyDisplay.innerHTML = `${currentDisplay.innerHTML}`;
+    clearCurrent();
+    currentOperand = '−';
+  }
+})
 
+multiplication.addEventListener('click', e => {
+  number1 = Number(`${currentDisplay.innerHTML}`);
+  historyDisplay.innerHTML = `${currentDisplay.innerHTML}`;
+  clearCurrent();
+  currentOperand = '×'
+})
 
+division.addEventListener('click', e => {
+  number1 = Number(`${currentDisplay.innerHTML}`);
+  historyDisplay.innerHTML = `${currentDisplay.innerHTML}`;
+  clearCurrent();
+  currentOperand = '÷'
+})
 
 window.addEventListener('keydown', e => {
   let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -89,12 +126,16 @@ window.addEventListener('keydown', e => {
   // operators (listen for click or keydown for specific operator on keypad, different variables for each operator)
   // a part of each event listener should be to append the text content of the button to the display div
 
+
 // add typed or clicked number to display div
 function typeNumber(number) { 
   if (currentDisplay.innerHTML == '') { 
     currentDisplay.innerHTML = `${Number(number)}`;
+    if (historyDisplay.innerHTML != '') {
+      clearHistory();
+    }
   } else {
-    currentDisplay.innerHTML = `${(Number(currentDisplay.innerText) * 10) + Number(number)}`;
+    currentDisplay.innerHTML += `${Number(number)}`;
   }
 }
 
@@ -104,7 +145,11 @@ function clearCurrent() {
 
 function clearAll() {
   currentDisplay.innerHTML = '';
-  historyDisplay.innerHTML - '';
+  historyDisplay.innerHTML = '';
+}
+
+function clearHistory() {
+  historyDisplay.innerHTML = '';
 }
 
 // Addition function
